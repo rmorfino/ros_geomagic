@@ -12,9 +12,11 @@ catkin_package(CATKIN_DEPENDS roscpp std_msgs geometry_msgs genmsg rosconsole tf
 include_directories(${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 
 add_executable(device_node src/device_node.cpp)
+add_executable(geomagic_breathing_lock src/breathing_lock.cpp)
 
 add_dependencies(device_node geomagic_control_generate_messages_cpp)
+add_dependencies(geomagic_breathing_lock geomagic_control_generate_messages_cpp)
 
 target_link_libraries(device_node HD HL HDU rt ncurses ${catkin_LIBRARIES})
-
+target_link_libraries(geomagic_breathing_lock ${catkin_LIBRARIES})
 

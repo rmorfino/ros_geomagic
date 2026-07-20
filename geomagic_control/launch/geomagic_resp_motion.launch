@@ -1,0 +1,31 @@
+<launch>
+  <arg name="device_name" default="TouchDevice2"/>
+  <arg name="prefix" default="Geomagic2"/>
+  <param name="publish_rate" type="int" value="1000" />
+  <group ns="$(arg prefix)">
+    <node name="device" pkg="geomagic_control" type="device_node" output="screen">
+      <param name="device_name" type="str" value="$(arg device_name)"/>
+    </node>
+    <param name="robot_description"
+           command="cat $(find geomagic_description)/urdf/geomagic.urdf" />
+    <node name="robot_state_publisher"
+          pkg="robot_state_publisher"
+          type="robot_state_publisher"
+          output="screen">
+      <remap from="/tf"        to="/Geomagic2/tf"/>
+      <remap from="/tf_static" to="/Geomagic2/tf_static"/>
+    </node>
+    <node name="breathing_lock"
+          pkg="geomagic_control"
+          type="geomagic_breathing_lock"
+          output="screen">
+      <param name="axis" value="y"/>
+      <param name="freq_hz" value="0.25"/>
+      <param name="amplitude_m" value="0.02"/>
+      <param name="rate_hz" value="200"/>
+      <param name="offset_x_m" value="0.0"/>
+      <param name="offset_y_m" value="0.0"/>
+      <param name="offset_z_m" value="0.0"/>  
+    </node>
+  </group>
+</launch>
