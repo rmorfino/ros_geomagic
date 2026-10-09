@@ -1,6 +1,6 @@
 <launch>
-  <arg name="device_name" default="TouchDevice2"/>
-  <arg name="prefix" default="Geomagic2"/>
+  <arg name="device_name" default="TouchDevice1"/>
+  <arg name="prefix" default="Geomagic1"/>
   <param name="publish_rate" type="int" value="1000" />
   <group ns="$(arg prefix)">
     <node name="device" pkg="geomagic_control" type="device_node" output="screen">
@@ -12,8 +12,8 @@
           pkg="robot_state_publisher"
           type="robot_state_publisher"
           output="screen">
-      <remap from="/tf"        to="/Geomagic2/tf"/>
-      <remap from="/tf_static" to="/Geomagic2/tf_static"/>
+      <remap from="/tf"        to="/Geomagic1/tf"/>
+      <remap from="/tf_static" to="/Geomagic1/tf_static"/>
     </node>
     <node name="breathing_lock"
           pkg="geomagic_control"
